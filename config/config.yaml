@@ -1,0 +1,109 @@
+alerts:
+  alert_window_frames: 150
+  bot_token: YOUR_TELEGRAM_BOT_TOKEN
+  camera_location: Main Intersection Camera
+  chat_id: YOUR_TELEGRAM_CHAT_ID
+  cooldown_seconds: 120
+  enable_telegram: false
+  gps_latitude: 0.0
+  gps_longitude: 0.0
+  min_severity_to_alert: Moderate
+  min_signals_to_alert: 2
+anomaly:
+  consecutive_frames_required: 2
+  event_cooldown_frames: 8
+  global_events_per_second: 3
+  incoherence_threshold: 45.0
+  min_frames_before_detect: 5
+  min_historical_max_speed: 0.8
+  min_rolling_avg_speed: 0.8
+  min_speed_for_signals: 0.3
+  motorcycle_history_frames: 8
+  motorcycle_min_ratio: 0.7
+  overlap_iou_threshold: 0.3
+  overlap_pair_cooldown: 20
+  speed_drop_heavy_ratio: 0.3
+  speed_drop_moderate_ratio: 0.55
+  speed_drop_rolling_end: -2
+  speed_drop_rolling_start: -10
+  trajectory_deviation_deg: 45.0
+detection:
+  iou_threshold: 0.35
+  max_detections: 50
+  yoloa_confidence: 0.25
+  yolob_confidence: 0.5
+hazard_detector:
+  cache_ttl_frames: 5
+  confidence: 0.5
+  iou: 0.45
+  roi_expand_px: 50
+models:
+  yoloa: models/yoloa_best.pt
+  yolob: models/yolob_best.pt
+motion_gate:
+  history: 200
+  min_contour_area: 500
+  min_motion_ratio: 0.002
+  var_threshold: 50
+pipeline:
+  detect_interval: 2
+  display_height: 720
+  display_width: 1280
+  log_minor: false
+  queue_size: 2
+  show_optical_flow: false
+  show_tracks: true
+  target_fps: 15
+  use_threading: true
+preprocessing:
+  adaptive: true
+  brightness_fog_threshold: 160
+  clahe_clip_limit: 2.0
+  clahe_tile_size: 8
+  contrast_clahe_threshold: 35
+  dark_channel_fog_threshold: 0.08
+  dcp_omega: 0.95
+  dcp_patch_size: 7
+  dcp_t_min: 0.1
+  rain_streak_threshold: 0.3
+  rain_temporal_frames: 3
+reporting:
+  log_filename: events.json
+  logs_dir: output/logs
+  output_dir: output
+  save_snapshot_on:
+  - Moderate
+  - Severe
+  - Critical
+  snapshots_dir: output/snapshots
+severity:
+  minor_max: 3
+  moderate_max: 6
+  persistence_bonus_frames: 3
+  persistence_bonus_score: 2
+  scores:
+    crashed_vehicle_yolo: 4
+    fire_detected: 5
+    flow_incoherence: 1
+    motorcycle_track_lost: 4
+    persistence_bonus: 2
+    smoke_detected: 3
+    speed_drop_heavy: 3
+    speed_drop_moderate: 1
+    trajectory_deviation: 3
+    vehicle_overlap: 3
+  severe_max: 10
+tracking:
+  algorithm: bytetrack
+  high_conf_threshold: 0.5
+  history_length: 30
+  iou_match_threshold: 0.7
+  lk_max_corners: 100
+  lk_max_level: 2
+  lk_window_size: 15
+  low_conf_threshold: 0.3
+  max_lost_frames: 20
+  min_hits: 3
+  min_lk_points: 3
+  use_kalman: true
+  velocity_smoothing_alpha: 0.3
